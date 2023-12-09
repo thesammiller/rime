@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import os
 from openai import OpenAI
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='./templates', static_folder='./static')
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
