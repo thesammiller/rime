@@ -25,7 +25,9 @@
       </style>
     </head>
     <body>
-      <form method="post" action="{{ url_for('hello') }}">
+      <p> {{ comments }} </p>
+      <p></p>
+      <form method="post" action="/">
 	<div>
 	  <label for="comments">Chat:</label>
 	  <textarea id="comments" name="comments" rows="16" cols="50">Enter message here...</textarea>

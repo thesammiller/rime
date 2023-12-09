@@ -15,15 +15,15 @@ CHATGPT_MODEL="gpt-4-32k"
 messages = [ {"role": "system", "content":  
               "You are a intelligent assistant."} ] 
 
-@app.route('/', methods=['GET', 'POST'])
-def form():
-    return render_template('form.html')
 
-@app.route('/hello', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def hello():
-    message = request.form['comments']
+    if request.form.get('comments'):
+        message = request.form['comments']
+    else:
+        message = ''
     messages.append( 
-            {"role": "user", "content": message}, 
+           {"role": "user", "content": message}, 
         )
     chat_completion = client.chat.completions.create(
         messages=messages,
@@ -32,7 +32,7 @@ def hello():
     reply = chat_completion.choices[0].message.content
     reply = "".join([i.message.content for i in chat_completion.choices])
     messages.append({"role": "assistant", "content": reply})
-    return render_template('greeting.html', comments=reply)
+    return render_template('form.html', comments=reply)
 
 if __name__ == "__main__":
     app.run(app.run(debug=True, host="0.0.0.0", port=8000))
