@@ -1,5 +1,8 @@
-from flask import Flask, render_template, request
 import os
+import re
+
+from flask import Flask, render_template, request
+from markupsafe import Markup
 from openai import OpenAI
 
 app = Flask(__name__,template_folder='./templates', static_folder='./static')
@@ -23,15 +26,16 @@ def hello():
     else:
         message = ''
     messages.append( 
-           {"role": "user", "content": message}, 
+           {"role": "user", "content": message},
         )
     chat_completion = client.chat.completions.create(
         messages=messages,
         model="gpt-3.5-turbo",
     )
-    #reply = chat_completion.choices[0].message.content
+    # Join together the different parts of the
     reply = "".join([i.message.content  for i in chat_completion.choices])
-    messages.append({"role": "assistant", "content": reply})
+    formatted_text = re.sub(r'```(\w+)?\s*(.*?)```', r'<pre><code>\2</code></pre>', reply, flags=re.DOTALL)
+    messages.append({"role": "assistant", "content": Markup(formatted_text)})
     return render_template('form.html', comments=messages)
 
 if __name__ == "__main__":

@@ -10,14 +10,14 @@
     <div id="comments-container" class="comments-container">
       {% for comment in comments %}
         <div class="comment {{ comment.role }}">
-          {{ comment.role.title() }}: {{ comment.content }}
+          {{ comment.role.title() }}: {{ comment.content | safe }}
         </div>
       {% endfor %}
     </div>
 
     <form method="post" action="/">
       <div>
-        <label for="comments">Your Message:</label>
+        <label for="comments">Message:</label>
         <textarea id="comments" name="comments" rows="4" placeholder="Enter your message here..."></textarea>
       </div>
       <div>
