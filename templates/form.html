@@ -26,20 +26,12 @@
     </head>
     <body>
       <form method="post" action="{{ url_for('hello') }}">
-        <div>
-          <label for="say">What greeting do you want to say?</label>
-          <input name="say" id="say" value="Hi">
-        </div>
-        <div>
-          <label for="to">Who do you want to say it to?</label>
-          <input name="to" id="to" value="Mom">
-        </div>
 	<div>
-	  <label for="comments">Comments</label>
-	  <textarea id="comments" name="comments" rows="4" cols="50">Enter here...</textarea>
+	  <label for="comments">Chat:</label>
+	  <textarea id="comments" name="comments" rows="16" cols="50">Enter message here...</textarea>
 	  </div>
         <div>
-          <button>Send my greetings</button>
+          <button>Send my message</button>
         </div>
       </form>
     </body>

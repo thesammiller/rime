@@ -10,7 +10,7 @@ client = OpenAI(
     api_key=OPENAI_API_KEY,
 )
 
-CHATGPT_MODEL="gpt-3.5-turbo"
+CHATGPT_MODEL="gpt-4-32k"
 
 messages = [ {"role": "system", "content":  
               "You are a intelligent assistant."} ] 
@@ -30,9 +30,8 @@ def hello():
         model="gpt-3.5-turbo",
     )
     reply = chat_completion.choices[0].message.content
+    reply = "".join([i.message.content for i in chat_completion.choices])
     messages.append({"role": "assistant", "content": reply})
-    say_greeting=request.form['say']
-    to_name=request.form['to']
     return render_template('greeting.html', comments=reply)
 
 if __name__ == "__main__":
