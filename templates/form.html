@@ -1,73 +1,109 @@
 <!DOCTYPE html>
-    <html lang="en-us">
-    <head>
-      <meta charset="utf-8">
-      <title>Submit Form</title>
-      <style>
-        form {
-          width: 420px;
-        }
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>Interactive Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      margin: 0;
+      padding-top: 40px;
+    }
 
-        div {
-          margin-bottom: 20px;
-        }
+    .container {
+      width: 600px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        label {
-          display: inline-block;
-          width: 240px;
-          text-align: right;
-          padding-right: 10px;
-        }
-
-        button, input {
-          float: right;
-        }
-
-   .comments-container {
+    .comments-container {
       height: 240px;
-      width: 480px;
+      width: 100%;
       border: 1px solid #ccc;
       overflow: auto;
       padding: 10px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border-radius: 4px;
     }
 
     .comment {
       margin-bottom: 10px;
-      padding: 5px;
+      padding: 10px;
       border-radius: 5px;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .user {
       background-color: #e7f4ff;
-      border-left: 3px solid #007bff;
+      border-left: 4px solid #007bff;
     }
 
     .assistant {
       background-color: #f7e6ff;
-      border-left: 3px solid #db7bff;
+      border-left: 4px solid #db7bff;
     }
 
+    form {
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
-  <div class="comments-container">
-    {% for comment in comments %}
-      <div class="comment {{ comment.role }}">
-        {{ comment.role.title() }}: {{ comment.content }}
+  <div class="container">
+    <div class="comments-container">
+      {% for comment in comments %}
+        <div class="comment {{ comment.role }}">
+          {{ comment.role.title() }}: {{ comment.content }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <form method="post" action="/">
+      <div>
+        <label for="comments">Your Message:</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="Enter your message here..."></textarea>
       </div>
-    {% endfor %}
+      <div>
+        <button type="submit">Send Message</button>
+      </div>
+    </form>
   </div>
-  
-  <form method="post" action="/">
-    <div>
-      <label for="comments">Chat:</label>
-      <textarea id="comments" name="comments" rows="16" cols="50">Enter message here...</textarea>
-    </div>
-    <div>
-      <button>Send my message</button>
-    </div>
-  </form>
 </body>
 </html>
-
-
