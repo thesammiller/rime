@@ -9,7 +9,8 @@ from openai import OpenAI
 app = Flask(__name__,template_folder='./templates', static_folder='./static')
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-ROOT_DIR="conversations/"
+TALK_DIR="conversations/"
+CODE_DIR="code/"
 CHATGPT_MODEL="gpt-3.5-turbo"
 STARTING_MESSAGE="You are an intelligent assistant."
 # To avoid the 4097 token size limit
@@ -29,7 +30,7 @@ def check_for_message_from_user(req):
 
 def save_message_history_from_chatgpt():
     filename = f"{time.time()}.txt"
-    with open(ROOT_DIR + filename, "w") as f:
+    with open(TALK_DIR + filename, "w") as f:
         for m in messages:
             f.write('{role} - {content}\n\n'.format(**m))
     return filename
@@ -42,7 +43,7 @@ def messages_are_outside_token_limit():
 
 def save_message_history():
     filename = f"{time.time()}.txt"
-    with open(ROOT_DIR + filename, "w") as f:
+    with open(TALK_DIR + filename, "w") as f:
         for m in messages:
             f.write("{role} - {content}\n\n".format(**m))
 
@@ -88,12 +89,44 @@ def format_text_with_code(reply):
     return Markup(re.sub(r'```(\w+)?\s*(.*?)```', r'<pre><code>\2</code></pre>', reply, flags=re.DOTALL))
 
 
-def strip_out_code(reply):
-    message_code_type = re.findall(r'```(\w+)?',  reply, flags=re.DOTALL)
-    if len(message_code_type) > 0:
-        code = re.findall(r'```(\w+)?\s*(.*?)```', reply, flags=re.DOTALL)
-        print("Code detected:\t{}".format(code[0][0]))
-        print("Code size:\t{}".format(code[0][1]))
+def save_code(code):
+    if len(code) != 2:
+        return
+    language = code[0]
+    program = code[1]
+    file_ext = ''
+    if language == 'python':
+        file_ext = 'py'
+    if language == 'coq':
+        file_ext = 'v'
+    filename = f"{time.time()}.{file_ext}"
+    with open(CODE_DIR+filename, "w") as f:
+        f.write(program)
+    return filename
+
+
+def strip_out_language_and_code(reply):
+    # Figure out what kind of code has the programming language
+    # We are trying to find text of the type ```python ..... ``` which is the multi-line code block
+    # format is (language, code)
+    return re.findall(r'```(\w+)?\s*(.*?)```', reply, flags=re.DOTALL)
+
+def check_reply_for_code_and_save(reply):
+    code_chunks = strip_out_language_and_code(reply)
+    files_created = []
+    if len(code_chunks) == 0:
+        return []
+    primary_language = code_chunks[0][0]
+    primary_chunk = ''
+    for code in code_chunks:
+        if code[0] == primary_language:
+            primary_chunk += code[1]
+        else:
+            filename = save_code(code)
+            files_created.append(filename)
+    filename = save_code((primary_language, primary_chunk))
+    files_created.append(filename)
+    return files_created
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -106,13 +139,12 @@ def home():
         )
     # 3) Send the message to ChatGPT
     reply = send_message_to_chatgpt(message)
-    # Figure out what kind of code has the programming language
-    # We are trying to find text of the type ```python ..... ``` which is the multi-line code block
-    strip_out_code(reply)
-    # If it's http, don't render it as Markup
+    files = check_reply_for_code_and_save(reply)
+
     formatted_text = format_text_with_code(reply)
     messages.append({"role": "assistant", "content": formatted_text})
     return render_template('form.html', messages=messages)
+
 
 if __name__ == "__main__":
     app.run(app.run(debug=True, host="0.0.0.0", port=8000))
