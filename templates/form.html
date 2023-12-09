@@ -22,21 +22,52 @@
         button, input {
           float: right;
         }
-      </style>
-    </head>
-    <body>
-      <div style="height:240px;width:480px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-	<p> {{ comments }} </p>
-	</div>
-      <p></p>
-      <form method="post" action="/">
-	<div>
-	  <label for="comments">Chat:</label>
-	  <textarea id="comments" name="comments" rows="16" cols="50">Enter message here...</textarea>
-	  </div>
-        <div>
-          <button>Send my message</button>
-        </div>
-      </form>
-    </body>
-  </html>
+
+   .comments-container {
+      height: 240px;
+      width: 480px;
+      border: 1px solid #ccc;
+      overflow: auto;
+      padding: 10px;
+    }
+
+    .comment {
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .user {
+      background-color: #e7f4ff;
+      border-left: 3px solid #007bff;
+    }
+
+    .assistant {
+      background-color: #f7e6ff;
+      border-left: 3px solid #db7bff;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="comments-container">
+    {% for comment in comments %}
+      <div class="comment {{ comment.role }}">
+        {{ comment.role.title() }}: {{ comment.content }}
+      </div>
+    {% endfor %}
+  </div>
+  
+  <form method="post" action="/">
+    <div>
+      <label for="comments">Chat:</label>
+      <textarea id="comments" name="comments" rows="16" cols="50">Enter message here...</textarea>
+    </div>
+    <div>
+      <button>Send my message</button>
+    </div>
+  </form>
+</body>
+</html>
+
+
