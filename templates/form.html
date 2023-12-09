@@ -7,18 +7,18 @@
 </head>
 <body>
   <div class="container">
-    <div id="comments-container" class="comments-container">
-      {% for comment in comments %}
-        <div class="comment {{ comment.role }}">
-          {{ comment.role.title() }}: {{ comment.content | safe }}
+    <div id="messages-container" class="messages-container">
+      {% for message in messages %}
+        <div class="message {{ message.role }}">
+          {{ message.role.title() }}: {{ message.content | safe }}
         </div>
       {% endfor %}
     </div>
 
     <form method="post" action="/">
       <div>
-        <label for="comments"></label>
-        <textarea id="comments" name="comments" rows="4" placeholder="Enter your message here..."></textarea>
+        <label for="messages"></label>
+        <textarea id="messages" name="messages" rows="4" placeholder="Enter your message here..."></textarea>
       </div>
       <div>
         <button type="submit">Send Message</button>
@@ -30,16 +30,16 @@
   <script>
     // Scroll to the last message
     window.onload = function() {
-      var element = document.getElementById("comments-container");
+      var element = document.getElementById("messages-container");
       element.scrollTop = element.scrollHeight;
     }
 
     // Save chat as text file
     function saveTextFile() {
       var textToWrite = "";
-      var comments = document.querySelectorAll("#comments-container .comment");
-      comments.forEach(function(comment) {
-        textToWrite += comment.innerText + "\n";
+      var messages = document.querySelectorAll("#messages-container .message");
+      messages.forEach(function(message) {
+        textToWrite += message.innerText + "\n";
       });
 
       var textBlob = new Blob([textToWrite], {type: 'text/plain'});
@@ -58,6 +58,7 @@
 
       downloadLink.click();
     }
+
   </script>
 </body>
 </html>

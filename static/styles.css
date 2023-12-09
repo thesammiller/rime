@@ -13,100 +13,101 @@ body {
 }
 
 .container {
-  width: 600px;
+  width: 90%;
+  max-width: 2048px;
+  margin: 0 auto;
   background-color: #9dAdBd;
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.3);
+  outline: 2px solid rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
-.comments-container {
-  height: 240px;
-  width: 100%;
-  border: 1px solid #3c3c3c;
-  overflow-y: auto;
-  padding: 15px;
-  margin-bottom: 25px;
-  background-color: #1c1c3b; /* A slightly lighter shade for contrast */
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 90%; /* Adjust this value as needed */
+  }
+}
+
+.messages-container {
+    height: 360px;
+    width: 100%;
+    border: 1px solid #3c3c3c;
+    overflow-y: auto;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #1c1c3b; /* A slightly lighter shade for contrast */
   border-radius: 10px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-}
+  }
 
-.comment {
-  margin-bottom: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 15px;
-  line-height: 1.6;
-  background-color: #1c1c3b;
-  border-left: 5px solid transparent;
-  color: #dcdcdc;
-  transition: all 0.3s ease;
-}
+.message {
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.6;
+    background-color: #1c1c3b;
+    border-left: 5px solid transparent;
+    color: #dcdcdc;
+    transition: all 0.3s ease;
+  }
 
-.comment:hover {
-  background-color: #37373d;
-}
 
 .user {
-  border-left-color: #4b8eda; /* A softer blue for user comments */
-}
+    border-left-color: #4b8eda; /* A softer blue for user messages */
+  }
 
 .assistant {
-  border-left-color: #c060a1; /* A soft neon pink for assistant comments */
-}
+    border-left-color: #c060a1; /* A soft neon pink for assistant messages */
+  }
 
 form {
-  width: 100%;
-  text-align: center;
-}
+    width: 100%;
+    text-align: center;
+  }
 
 label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 600;
-  font-size: 16px;
-  color: #252526;
-}
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #252526;
+  }
 
 textarea {
-  width: calc(100% - 22px);
-  padding: 12px;
-  border-radius: 8px;
-  border-color: #4b8eda;
-  background-color: #252526;
-  color: #dcdcdc;
-  font-size: 15px;
-  margin-bottom: 20px;
-  transition: border 0.3s ease;
-}
+    width: calc(100% - 22px);
+    padding: 12px;
+    border-radius: 8px;
+    border-color: #4b8eda;
+    background-color: #252526;
+    color: #dcdcdc;
+    font-size: 15px;
+    margin-bottom: 20px;
+    transition: border 0.3s ease;
+  }
 
 textarea:focus {
-  border-color: #4b8eda;
-  outline: none;
-}
+    border-color: #4b8eda;
+    outline: none;
+  }
 
 button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-button:hover {
-  background-color:  #0056b3;
-  box-shadow: 0 0 10px 2px #7f5af0;
-}
-
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+    font-weight: 600;
+  }
 
 /* Style for inline code */
-.comment code {
+.message code {
   background-color: #2d2d50;
   border-radius: 4px;
   padding: 2px 6px;
@@ -116,7 +117,7 @@ button:hover {
 }
 
 /* Style for code blocks */
-.comment pre {
+.message pre {
   background-color: #2d2d50;
   padding: 10px;
   border-radius: 8px;
@@ -125,4 +126,14 @@ button:hover {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+button:hover {
+  background-color:  #0056b3;
+  box-shadow: 0 0 10px 2px #2f5af0;
+}
+
+.message:hover {
+  background-color: #37373d;
+}
+
 
