@@ -14,7 +14,7 @@ CHATGPT_MODEL="gpt-3.5-turbo"
 STARTING_MESSAGE="You are an intelligent assistant."
 # To avoid the 4097 token size limit
 # "Token" can be variable number of characters
-CHARACTER_SIZE_LIMIT=20096
+CHARACTER_SIZE_LIMIT=18000
 
 client = OpenAI(
     api_key=OPENAI_API_KEY,
@@ -88,13 +88,28 @@ def format_text_with_code(reply):
     return Markup(re.sub(r'```(\w+)?\s*(.*?)```', r'<pre><code>\2</code></pre>', reply, flags=re.DOTALL))
 
 
+def strip_out_code(reply):
+    message_code_type = re.findall(r'```(\w+)?',  reply, flags=re.DOTALL)
+    if len(message_code_type) > 0:
+        code = re.findall(r'```(\w+)?\s*(.*?)```', reply, flags=re.DOTALL)
+        print("Code detected:\t{}".format(code[0][0]))
+        print("Code size:\t{}".format(code[0][1]))
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    # 1) Check if there is a message in the request (i.e. is it a fresh page load?)
     message = check_for_message_from_user(request)
+    # 2) Add the message to the conversation
     messages.append(
            {"role": "user", "content": message},
         )
+    # 3) Send the message to ChatGPT
     reply = send_message_to_chatgpt(message)
+    # Figure out what kind of code has the programming language
+    # We are trying to find text of the type ```python ..... ``` which is the multi-line code block
+    strip_out_code(reply)
+    # If it's http, don't render it as Markup
     formatted_text = format_text_with_code(reply)
     messages.append({"role": "assistant", "content": formatted_text})
     return render_template('form.html', messages=messages)
