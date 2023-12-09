@@ -1,7 +1,7 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1e1e1e;
-  color: #d4d4d4;
+  background-color: #0a0a23; /* Darker shade to match the background image */
+  color: #e0e0e0; /* Lighter text color for better readability */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,11 +9,12 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-image: url('background.png');
 }
 
 .container {
   width: 600px;
-  background-color: #252526;
+  background-color: #1d1d1d;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
@@ -27,7 +28,7 @@ body {
   overflow-y: auto;
   padding: 15px;
   margin-bottom: 25px;
-  background-color: #1e1e1e;
+  background-color: #1c1c3b; /* A slightly lighter shade for contrast */
   border-radius: 10px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -38,7 +39,7 @@ body {
   border-radius: 8px;
   font-size: 15px;
   line-height: 1.6;
-  background-color: #2d2d30;
+  background-color: #1c1c3b;
   border-left: 5px solid transparent;
   color: #dcdcdc;
   transition: all 0.3s ease;
@@ -49,11 +50,11 @@ body {
 }
 
 .user {
-  border-left-color: #569cd6;
+  border-left-color: #4b8eda; /* A softer blue for user comments */
 }
 
 .assistant {
-  border-left-color: #c586c0;
+  border-left-color: #c060a1; /* A soft neon pink for assistant comments */
 }
 
 form {
@@ -73,7 +74,7 @@ textarea {
   width: calc(100% - 22px);
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #3c3c3c;
+  border-color: #4b8eda;
   background-color: #252526;
   color: #dcdcdc;
   font-size: 15px;
@@ -82,7 +83,7 @@ textarea {
 }
 
 textarea:focus {
-  border-color: #569cd6;
+  border-color: #4b8eda;
   outline: none;
 }
 
@@ -99,12 +100,14 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color:  #0056b3;
+  box-shadow: 0 0 10px 2px #7f5af0;
 }
+
 
 /* Style for inline code */
 .comment code {
-  background-color: #1e1e2e;
+  background-color: #2d2d50;
   border-radius: 4px;
   padding: 2px 6px;
   font-family: 'Courier New', Courier, monospace;
@@ -114,7 +117,7 @@ button:hover {
 
 /* Style for code blocks */
 .comment pre {
-  background-color: #1e1e2e;
+  background-color: #2d2d50;
   padding: 10px;
   border-radius: 8px;
   font-family: 'Courier New', Courier, monospace;
@@ -122,3 +125,4 @@ button:hover {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+

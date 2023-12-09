@@ -18,7 +18,6 @@ CHATGPT_MODEL="gpt-4-32k"
 messages = [ {"role": "system", "content":  
               "You are a intelligent assistant."} ] 
 
-
 @app.route('/', methods=['GET', 'POST'])
 def hello():
     if request.form.get('comments'):
