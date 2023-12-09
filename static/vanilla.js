@@ -4,7 +4,6 @@ function scrollToLastMessage() {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// Scroll to the last message
     window.onload = function() {
     scrollToLastMessage();
 }
@@ -16,10 +15,10 @@ function saveTextFile() {
     messages.forEach(function(message) {
         textToWrite += message.innerText + "\n";
     });
-    
+
     var textBlob = new Blob([textToWrite], {type: 'text/plain'});
     var fileName = "ChatHistory.txt";
-    
+
     var downloadLink = document.createElement("a");
     downloadLink.download = fileName;
     downloadLink.innerHTML = "Download File";
@@ -30,6 +29,6 @@ function saveTextFile() {
         downloadLink.style.display = "none";
         document.body.appendChild(downloadLink);
     }
-    
-        downloadLink.click();
+
+    downloadLink.click();
 }
