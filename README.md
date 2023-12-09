@@ -1,9 +1,13 @@
-# ChatGPT Interface
+# Rime
 
-This is a simple, HTML-based interface for ChatGPT. 
+This is a simple, HTML-based chatbot interface for ChatGPT.
+
+Features include:
+- Code formatting.
 
 ## Installation
 `pip3 install openai`
+
 `pip3 install flask`
 
 ## Running

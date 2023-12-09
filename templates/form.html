@@ -3,107 +3,61 @@
 <head>
   <meta charset="utf-8">
   <title>Interactive Chat</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding-top: 40px;
-    }
-
-    .container {
-      width: 600px;
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .comments-container {
-      height: 240px;
-      width: 100%;
-      border: 1px solid #ccc;
-      overflow: auto;
-      padding: 10px;
-      margin-bottom: 20px;
-      background-color: #fff;
-      border-radius: 4px;
-    }
-
-    .comment {
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .user {
-      background-color: #e7f4ff;
-      border-left: 4px solid #007bff;
-    }
-
-    .assistant {
-      background-color: #f7e6ff;
-      border-left: 4px solid #db7bff;
-    }
-
-    form {
-      width: 100%;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}"/>>
 </head>
 <body>
   <div class="container">
-    <div class="comments-container">
+    <div id="comments-container" class="comments-container">
       {% for comment in comments %}
         <div class="comment {{ comment.role }}">
-          {{ comment.role.title() }}: {{ comment.content }}
+          {{ comment.role.title() }}: {{ comment.content | safe }}
         </div>
       {% endfor %}
     </div>
 
     <form method="post" action="/">
       <div>
-        <label for="comments">Your Message:</label>
+        <label for="comments">Message:</label>
         <textarea id="comments" name="comments" rows="4" placeholder="Enter your message here..."></textarea>
       </div>
       <div>
         <button type="submit">Send Message</button>
       </div>
     </form>
+    <button onclick="saveTextFile()">Save Chat</button>
   </div>
+
+  <script>
+    // Scroll to the last message
+    window.onload = function() {
+      var element = document.getElementById("comments-container");
+      element.scrollTop = element.scrollHeight;
+    }
+
+    // Save chat as text file
+    function saveTextFile() {
+      var textToWrite = "";
+      var comments = document.querySelectorAll("#comments-container .comment");
+      comments.forEach(function(comment) {
+        textToWrite += comment.innerText + "\n";
+      });
+
+      var textBlob = new Blob([textToWrite], {type: 'text/plain'});
+      var fileName = "ChatHistory.txt";
+
+      var downloadLink = document.createElement("a");
+      downloadLink.download = fileName;
+      downloadLink.innerHTML = "Download File";
+      if (window.URL != null) {
+        downloadLink.href = window.URL.createObjectURL(textBlob);
+      } else {
+        downloadLink.href = window.URL.createObjectURL(textBlob);
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+      }
+
+      downloadLink.click();
+    }
+  </script>
 </body>
 </html>

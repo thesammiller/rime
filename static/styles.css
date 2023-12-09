@@ -1,0 +1,128 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0a0a23; /* Darker shade to match the background image */
+  color: #e0e0e0; /* Lighter text color for better readability */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-image: url('background.png');
+}
+
+.container {
+  width: 600px;
+  background-color: #1d1d1d;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.comments-container {
+  height: 240px;
+  width: 100%;
+  border: 1px solid #3c3c3c;
+  overflow-y: auto;
+  padding: 15px;
+  margin-bottom: 25px;
+  background-color: #1c1c3b; /* A slightly lighter shade for contrast */
+  border-radius: 10px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.comment {
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  background-color: #1c1c3b;
+  border-left: 5px solid transparent;
+  color: #dcdcdc;
+  transition: all 0.3s ease;
+}
+
+.comment:hover {
+  background-color: #37373d;
+}
+
+.user {
+  border-left-color: #4b8eda; /* A softer blue for user comments */
+}
+
+.assistant {
+  border-left-color: #c060a1; /* A soft neon pink for assistant comments */
+}
+
+form {
+  width: 100%;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #9cdcfe;
+}
+
+textarea {
+  width: calc(100% - 22px);
+  padding: 12px;
+  border-radius: 8px;
+  border-color: #4b8eda;
+  background-color: #252526;
+  color: #dcdcdc;
+  font-size: 15px;
+  margin-bottom: 20px;
+  transition: border 0.3s ease;
+}
+
+textarea:focus {
+  border-color: #4b8eda;
+  outline: none;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color:  #0056b3;
+  box-shadow: 0 0 10px 2px #7f5af0;
+}
+
+
+/* Style for inline code */
+.comment code {
+  background-color: #2d2d50;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: #dcdcdc;
+}
+
+/* Style for code blocks */
+.comment pre {
+  background-color: #2d2d50;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
