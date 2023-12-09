@@ -1,33 +1,35 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .container {
   width: 600px;
-  background-color: #ffffff;
+  background-color: #252526;
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
 
 .comments-container {
   height: 240px;
   width: 100%;
-  border: 1px solid #ddd;
-  overflow: auto;
+  border: 1px solid #3c3c3c;
+  overflow-y: auto;
   padding: 15px;
   margin-bottom: 25px;
-  background-color: #fff;
+  background-color: #1e1e1e;
   border-radius: 10px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .comment {
@@ -36,21 +38,22 @@ body {
   border-radius: 8px;
   font-size: 15px;
   line-height: 1.6;
-  background-color: #f9f9f9;
+  background-color: #2d2d30;
   border-left: 5px solid transparent;
+  color: #dcdcdc;
   transition: all 0.3s ease;
 }
 
 .comment:hover {
-  background-color: #f0f0f0;
+  background-color: #37373d;
 }
 
 .user {
-  border-left-color: #007bff;
+  border-left-color: #569cd6;
 }
 
 .assistant {
-  border-left-color: #db7bff;
+  border-left-color: #c586c0;
 }
 
 form {
@@ -63,21 +66,23 @@ label {
   margin-bottom: 10px;
   font-weight: 600;
   font-size: 16px;
-  color: #333;
+  color: #9cdcfe;
 }
 
 textarea {
   width: calc(100% - 22px);
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #3c3c3c;
+  background-color: #252526;
+  color: #dcdcdc;
   font-size: 15px;
   margin-bottom: 20px;
   transition: border 0.3s ease;
 }
 
 textarea:focus {
-  border-color: #007bff;
+  border-color: #569cd6;
   outline: none;
 }
 
@@ -95,4 +100,25 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Style for inline code */
+.comment code {
+  background-color: #1e1e2e;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: #dcdcdc;
+}
+
+/* Style for code blocks */
+.comment pre {
+  background-color: #1e1e2e;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
