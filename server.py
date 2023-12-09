@@ -29,10 +29,11 @@ def hello():
         messages=messages,
         model="gpt-3.5-turbo",
     )
-    reply = chat_completion.choices[0].message.content
-    reply = "".join([i.message.content for i in chat_completion.choices])
+    #reply = chat_completion.choices[0].message.content
+    previous_messages = "\n\n\n".join([m['content'] for m in messages])
+    reply = "\n".join(["<p>" + i.message.content + "</p>"  for i in chat_completion.choices])
     messages.append({"role": "assistant", "content": reply})
-    return render_template('form.html', comments=reply)
+    return render_template('form.html', comments=previous_messages + reply)
 
 if __name__ == "__main__":
     app.run(app.run(debug=True, host="0.0.0.0", port=8000))

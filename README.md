@@ -1,5 +1,7 @@
 # ChatGPT Interface
 
+This is a simple, HTML-based interface for ChatGPT. 
+
 ## Installation
 `pip3 install openai`
 `pip3 install flask`
