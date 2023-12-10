@@ -32,3 +32,10 @@ function saveTextFile() {
 
     downloadLink.click();
 }
+
+function resetMessagesOnServer() {
+    var r = new XMLHttpRequest();
+    r.open("GET", "/reset", true);
+    r.send();
+    location.reload()
+}
